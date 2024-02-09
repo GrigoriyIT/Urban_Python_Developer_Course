@@ -10,7 +10,6 @@ class Warehouse:
         self.name = name
         self.content = content
         self.road_out = None
-        self.set_road_out = None
         self.queue_in = []
         self.queue_out = []
 
@@ -18,20 +17,21 @@ class Warehouse:
         return 'Склад {} груза {}'.format(self.name, self.content)
 
     def set_road_out(self, road):
-        self.set_road_out = road
+        self.road_out = road
 
     def truck_arrived(self, truck):
         self.queue_in.append(truck)
-        print('{} прибыл грузовик {}'.format(self.name, self.truck))
+        truck.place = self
+        print('{} прибыл грузовик {}'.format(self.name, truck))
 
     def get_next_ruck(self):
         if self.queue_in:
-            truck = self.queue_out.pop()
+            truck = self.queue_in.pop()
             return truck
 
     def truck_ready(self, truck):
         self.queue_out.append(truck)
-        print('{} грузовик готов {}'.format(self.name, self.truck))
+        print('{} грузовик готов {}'.format(self.name, truck))
 
     def act(self):
         while self.queue_out:
