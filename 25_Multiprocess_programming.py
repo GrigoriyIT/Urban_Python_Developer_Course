@@ -23,7 +23,7 @@ class WarehouseManager:
 
         # Многопоточно вар 1
         for request in requests:
-            process = mp.Process(target=self.process_request, args=(request, ))
+            process = mp.Process(target=self.process_request, args=(request,))
             process.start()
             process.join()
 
@@ -31,8 +31,8 @@ class WarehouseManager:
         # with mp.Pool() as pool:
         #     pool.map(self.process_request, requests)
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     # Создаем менеджера склада
     manager = WarehouseManager()
 
